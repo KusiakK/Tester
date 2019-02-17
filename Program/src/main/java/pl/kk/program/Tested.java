@@ -1,4 +1,4 @@
-package pl.kk.testcode;
+package pl.kk.program;
 
 import pl.kk.annotations.MarkedForRun;
 import pl.kk.annotations.Run;
