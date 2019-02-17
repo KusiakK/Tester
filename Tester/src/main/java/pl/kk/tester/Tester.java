@@ -1,5 +1,6 @@
 package pl.kk.tester;
 
+import pl.kk.annotations.MarkedForRun;
 import pl.kk.annotations.Run;
 
 import java.lang.reflect.InvocationTargetException;
@@ -9,18 +10,16 @@ public class Tester {
 
     private static final TesterStatistics statistics = new TesterStatistics();
 
-    public static void main(String[] args) {
-        Tester tester = new Tester();
-        tester.process(tester);
-    }
-
-    public void process(Tester testedClass) {
+    public void process(MarkedForRun testedClass) {
 
         Method[] methods = testedClass.getClass().getDeclaredMethods();
 
         for (Method method : methods) {
             try {
-                if (method.isAnnotationPresent(Run.class)) method.invoke(testedClass.getClass());
+                if (method.isAnnotationPresent(Run.class)) {
+                    method.invoke(testedClass);
+                    statistics.addSuccessfulRun();
+                }
             } catch (IllegalArgumentException e) {
                 System.err.format("metoda %s - nieodpowiednia ilość argumentów (%s) %n\n", method, e.getMessage());
             } catch (IllegalAccessException e) {
@@ -30,11 +29,6 @@ public class Tester {
             }
         }
         System.out.format("Odpalone metody : %d\n", statistics.methodsRan());
-    }
-
-    @Run
-    public void runnable() {
-        System.out.println("odpalanka się odpala");
     }
 }
 
