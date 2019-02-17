@@ -6,10 +6,12 @@
 
     <groupId>pl.kk</groupId>
     <artifactId>IntensiveTester</artifactId>
-    <version>0.1</version>
+    <version>${project.version}</version>
     <name>Tester</name>
     <description>Program executing methods with annotation @Run</description>
+
     <packaging>pom</packaging>
+
     <modules>
         <module>Annotations</module>
         <module>Tester</module>
@@ -17,6 +19,7 @@
     </modules>
 
     <properties>
+        <project.version>0.1</project.version>
         <!-- https://maven.apache.org/general.html#encoding-warning -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- https://maven.apache.org/general.html#special-characters-site -->

@@ -13,6 +13,20 @@
 
     <packaging>jar</packaging>
 
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>Annotations</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>Tester</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
+
     <build>
         <finalName>TestCode</finalName>
         <plugins>
