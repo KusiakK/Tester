@@ -11,8 +11,6 @@
         <version>0.1</version>
     </parent>
 
-    <packaging>jar</packaging>
-
     <build>
         <finalName>Annotations</finalName>
         <plugins>
@@ -20,18 +18,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>${version.plugin.maven.jar}</version>
-                <configuration>
-                    <archive>
-                        <index>true</index>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <mainClass>pl.kk.App</mainClass>
-                        </manifest>
-                        <manifestEntries>
-                            <mode>development</mode>
-                        </manifestEntries>
-                    </archive>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

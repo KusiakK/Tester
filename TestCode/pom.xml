@@ -39,7 +39,7 @@
                         <index>true</index>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>pl.kk.App</mainClass>
+                            <mainClass>Tester</mainClass>
                         </manifest>
                         <manifestEntries>
                             <mode>development</mode>
