@@ -1,10 +1,9 @@
 package pl.kk.testcode;
 
+import pl.kk.annotations.MarkedForRun;
 import pl.kk.annotations.Run;
-import pl.kk.annotations.Runnable;
 
-@Runnable
-public class Tested {
+public class Tested implements MarkedForRun {
 
     @Run
     public void runnable() {
@@ -12,11 +11,11 @@ public class Tested {
     }
 
     @Run
-    void method() {
+    public void method() {
         System.out.println("metodka się odpala");
     }
 
-    void unRunnable() {
+    public void unRunnable() {
         System.out.println("nieodpalalnka się odpala");
     }
 }
