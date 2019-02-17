@@ -9,10 +9,17 @@ Program odpalający metody oznaczone adnotacją @Run
 - Moduły mavenowe: adnotacje (rzeczone @Run), tester (sedno zadania) i program (jako zależność używa obu pozostałych modułów).
 - Wywołanie całości via mvn:exec (czy główną klasę testera) powinno odpalić każdą z metod, nawet jeśli jedna ma błąd kompilacji czy nieoczekiwany wynik.
 
+## Wymagania
+
+- linux
+- bash lub inny shell
+- maven 3.6.0
+
 ## Użycie
 
 - włącz linuxa
-- git clone
+- odpal terminal
+- git clone https://git.epam.com/Konrad_Kusiak/Tester.git
 - cd Tester
 - mvn install
 - mvn exec:jar -pl Program
