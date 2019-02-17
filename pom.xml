@@ -6,7 +6,7 @@
 
     <groupId>pl.kk</groupId>
     <artifactId>IntensiveTester</artifactId>
-    <version>${project.version}</version>
+    <version>0.1</version>
     <name>Tester</name>
     <description>Program executing methods with annotation @Run</description>
 
@@ -19,7 +19,6 @@
     </modules>
 
     <properties>
-        <project.version>0.1</project.version>
         <!-- https://maven.apache.org/general.html#encoding-warning -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- https://maven.apache.org/general.html#special-characters-site -->
@@ -32,12 +31,22 @@
         <maven.resources.encoding>${project.build.sourceEncoding}</maven.resources.encoding>
         <version.maven>3.6.0</version.maven>
         <!-- dependencies versions -->
+        <version.dependency.classindex>3.6</version.dependency.classindex>
         <!-- plugin versions should go here, so below they can be omitted -->
+        <version.plugin.mojo.exec>1.6.0</version.plugin.mojo.exec>
         <version.plugin.maven.enforcer>3.0.0-M2</version.plugin.maven.enforcer>
         <version.plugin.maven.jar>3.1.0</version.plugin.maven.jar>
         <version.plugin.maven.compiler>3.8.0</version.plugin.maven.compiler>
         <version.plugin.maven.resources>3.1.0</version.plugin.maven.resources>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.atteo.classindex</groupId>
+            <artifactId>classindex</artifactId>
+            <version>${version.dependency.classindex}</version>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>
