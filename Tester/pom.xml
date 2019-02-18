@@ -11,6 +11,8 @@
         <version>0.1</version>
     </parent>
 
+    <packaging>jar</packaging>
+
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -31,7 +33,7 @@
                         <index>true</index>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>Tester</mainClass>
+                            <mainClass>Program</mainClass>
                         </manifest>
                         <manifestEntries>
                             <mode>development</mode>

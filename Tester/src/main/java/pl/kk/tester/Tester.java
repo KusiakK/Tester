@@ -1,34 +1,40 @@
 package pl.kk.tester;
 
-import pl.kk.annotations.MarkedForRun;
 import pl.kk.annotations.Run;
 
-import java.lang.reflect.InvocationTargetException;
+import javax.annotation.processing.AbstractProcessor;
+import javax.annotation.processing.RoundEnvironment;
+import javax.annotation.processing.SupportedAnnotationTypes;
+import javax.annotation.processing.SupportedSourceVersion;
+import javax.lang.model.SourceVersion;
+import javax.lang.model.element.Element;
+import javax.lang.model.element.TypeElement;
+import javax.tools.Diagnostic;
 import java.lang.reflect.Method;
+import java.util.Set;
 
-public class Tester {
+@SupportedAnnotationTypes("pl.kk.annotations.Run")
+@SupportedSourceVersion(SourceVersion.RELEASE_11)
+public class Tester extends AbstractProcessor {
 
     private static final TesterStatistics statistics = new TesterStatistics();
 
-    public void process(MarkedForRun testedClass) {
+    @Override
+    public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
+        StringBuilder message = new StringBuilder();
 
-        Method[] methods = testedClass.getClass().getDeclaredMethods();
+        for (Element elem : roundEnv.getElementsAnnotatedWith(Run.class)) {
+            Run implementation = elem.getAnnotation(Run.class);
 
-        for (Method method : methods) {
-            try {
-                if (method.isAnnotationPresent(Run.class)) {
-                    method.invoke(testedClass);
-                    statistics.addSuccessfulRun();
-                }
-            } catch (IllegalArgumentException e) {
-                System.err.format("metoda %s - nieodpowiednia ilość argumentów (%s) %n\n", method, e.getMessage());
-            } catch (IllegalAccessException e) {
-                System.err.format("metoda %s - dostęp zabroniony? %s przyczyna: %s %n\n", method, e.getMessage(), e.getCause());
-            } catch (InvocationTargetException e) {
-                System.err.format("metoda %s - wywołanie nieudane z racji na %s przyczyna: %s %n\n", method, e.getMessage(), e.getCause());
+            message.append("Methods found in " + elem.getSimpleName().toString() + ":\n");
+
+            for (Method method : implementation.getClass().getMethods()) {
+                message.append(method.getName() + "\n");
             }
+
+            processingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE, message.toString());
         }
-        System.out.format("Odpalone metody : %d\n", statistics.methodsRan());
+        return false;
     }
 }
 
