@@ -2,7 +2,6 @@ package pl.kk.tester;
 
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -12,9 +11,7 @@ public class Tester {
 
     public void process(Class<?> testedClass, Class<? extends Annotation> annotation) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
 
-        Constructor<?> constructor = testedClass.getConstructor();
-        Object testObject = constructor.newInstance(new Object[] { });
-
+        Object testObject = testedClass.getConstructor().newInstance();
         Method[] methods = testedClass.getDeclaredMethods();
 
         for (Method method : methods) {
