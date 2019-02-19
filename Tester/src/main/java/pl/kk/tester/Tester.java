@@ -21,14 +21,14 @@ public class Tester {
                     statistics.addSuccessfulRun();
                 }
             } catch (IllegalArgumentException e) {
-                System.err.format("metoda %s - nieodpowiednia ilość argumentów (%s) %n\n", method, e.getMessage());
+                System.err.format("metoda %s - nieodpowiednia ilość argumentów (%s) %n", method, e.getMessage());
             } catch (IllegalAccessException e) {
-                System.err.format("metoda %s - dostęp zabroniony? %s przyczyna: %s %n\n", method, e.getMessage(), e.getCause());
+                System.err.format("metoda %s - dostęp zabroniony? %s przyczyna: %s %n", method, e.getMessage(), e.getCause());
             } catch (InvocationTargetException e) {
-                System.err.format("metoda %s - wywołanie nieudane z racji na %s przyczyna: %s %n\n", method, e.getMessage(), e.getCause());
+                System.err.format("metoda %s - wywołanie nieudane z racji na %s przyczyna: %s %n", method, e.getMessage(), e.getCause());
             }
         }
-        System.out.format("Odpalone metody : %d\n", statistics.methodsRan());
+        System.out.format("Odpalone metody : %d%n", statistics.methodsRan());
     }
 }
 
