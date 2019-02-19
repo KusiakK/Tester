@@ -51,7 +51,7 @@
                         <configuration>
                             <compilerArgument>-proc:none</compilerArgument>
                             <includes>
-                                <include>pl/kk/tester/Tester.java</include>
+                                <include>pl/kk/tester/TesterProcessor.java</include>
                             </includes>
                         </configuration>
                     </execution>

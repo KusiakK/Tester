@@ -1,8 +1,9 @@
 package pl.kk.program;
 
 import pl.kk.annotations.Run;
+import pl.kk.annotations.ScanForRun;
 
-@Run
+@ScanForRun
 public class Tested {
 
     @Run
