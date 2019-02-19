@@ -1,9 +1,8 @@
 package pl.kk.program;
 
-import pl.kk.annotations.MarkedForRun;
 import pl.kk.annotations.Run;
 
-public class Tested implements MarkedForRun {
+public class Tested {
 
     @Run
     public void runnable() {

@@ -1,8 +1,8 @@
 package pl.kk.tester;
 
-import pl.kk.annotations.MarkedForRun;
-import pl.kk.annotations.Run;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -10,14 +10,17 @@ public class Tester {
 
     private static final TesterStatistics statistics = new TesterStatistics();
 
-    public void process(MarkedForRun testedClass) {
+    public void process(Class<?> testedClass, Class<? extends Annotation> annotation) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
 
-        Method[] methods = testedClass.getClass().getDeclaredMethods();
+        Constructor<?> constructor = testedClass.getConstructor();
+        Object testObject = constructor.newInstance(new Object[] { });
+
+        Method[] methods = testedClass.getDeclaredMethods();
 
         for (Method method : methods) {
             try {
-                if (method.isAnnotationPresent(Run.class)) {
-                    method.invoke(testedClass);
+                if (method.isAnnotationPresent(annotation)) {
+                    method.invoke(testObject);
                     statistics.addSuccessfulRun();
                 }
             } catch (IllegalArgumentException e) {
