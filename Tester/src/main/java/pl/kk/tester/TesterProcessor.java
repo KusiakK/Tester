@@ -3,6 +3,7 @@ package pl.kk.tester;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
+import pl.kk.annotations.ScanForRun;
 
 import javax.annotation.processing.*;
 import javax.lang.model.SourceVersion;
@@ -20,15 +21,7 @@ import java.util.*;
 public class TesterProcessor extends AbstractProcessor {
 
     private String fqClassName = null;
-    private Map<String, ExecutableElement> methods = new HashMap<>();
     private List<String> fqClassNames = new LinkedList<>();
-
-
-    @Override
-    public synchronized void init(ProcessingEnvironment processingEnv) {
-        super.init(processingEnv);
-
-    }
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
@@ -45,15 +38,6 @@ public class TesterProcessor extends AbstractProcessor {
                 fqClassName = classElement.getQualifiedName().toString();
 
                 fqClassNames.add(fqClassName);
-            } else if (e.getKind() == ElementKind.METHOD) {
-
-                ExecutableElement exeElement = (ExecutableElement) e;
-
-                processingEnv.getMessager().printMessage(
-                        Diagnostic.Kind.NOTE,
-                        "annotated method: " + exeElement.getSimpleName(), e);
-
-                methods.put(exeElement.getSimpleName().toString(), exeElement);
             }
         }
 
@@ -73,7 +57,6 @@ public class TesterProcessor extends AbstractProcessor {
 
         VelocityContext vc = new VelocityContext();
 
-        vc.put("methods", methods);
         vc.put("fqClassNames", fqClassNames);
 
         Template vt = ve.getTemplate("testerinfo.vm");

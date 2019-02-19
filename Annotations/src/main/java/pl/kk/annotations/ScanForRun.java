@@ -1,4 +1,4 @@
-package pl.kk.tester;
+package pl.kk.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

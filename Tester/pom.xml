@@ -19,6 +19,12 @@
             <artifactId>velocity</artifactId>
             <version>1.7</version>
         </dependency>
+        <dependency>
+            <groupId>pl.kk</groupId>
+            <artifactId>Annotations</artifactId>
+            <version>0.1</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <build>
