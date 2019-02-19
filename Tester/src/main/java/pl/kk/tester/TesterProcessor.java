@@ -4,6 +4,8 @@ import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import pl.kk.annotations.ScanForRun;
+import pl.kk.tester.source_file.JavaSourceFile;
+import pl.kk.tester.source_file.JavaSourceFiles;
 
 import javax.annotation.processing.*;
 import javax.lang.model.SourceVersion;
@@ -43,23 +45,18 @@ public class TesterProcessor extends AbstractProcessor {
 
         if (fqClassName == null) return true;
 
-        Properties props = new Properties();
+        Properties properties = new Properties();
         URL url = this.getClass().getClassLoader().getResource("velocity.properties");
         try (final InputStream inStream = url.openStream()) {
-            props.load(inStream);
+            properties.load(inStream);
         } catch (IOException e) {
             processingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE,
                     String.format("Cannot read configuration file %s - cause: %s %n", url.toString(), e.getMessage()));
         }
 
-        VelocityEngine ve = new VelocityEngine(props);
-        ve.init();
+        JavaSourceFile sourceFile = JavaSourceFiles.createMainJavaSourceFile(properties, "testerinfo.vm");
 
-        VelocityContext vc = new VelocityContext();
-
-        vc.put("fqClassNames", fqClassNames);
-
-        Template vt = ve.getTemplate("testerinfo.vm");
+        sourceFile.put("fqClassNames", fqClassNames);
 
         try {
             JavaFileObject jfo = processingEnv.getFiler().createSourceFile("App");
@@ -69,11 +66,7 @@ public class TesterProcessor extends AbstractProcessor {
 
             Writer writer = jfo.openWriter();
 
-            processingEnv.getMessager().printMessage(
-                    Diagnostic.Kind.NOTE,
-                    "applying velocity template: " + vt.getName());
-
-            vt.merge(vc, writer);
+            sourceFile.mergeAndWrite(writer);
 
             writer.close();
         } catch (IOException e) {
