@@ -14,7 +14,7 @@ public class JavaSourceFiles {
 
     /**
      * @param properties for Velocity engine
-     * @param velocityTemplateFilePath
+     * @param velocityTemplateFilePath for Velocity template
      * @return {@link JavaSourceFile}
      */
     public static JavaSourceFile createMainJavaSourceFile(Properties properties, String velocityTemplateFilePath) {
