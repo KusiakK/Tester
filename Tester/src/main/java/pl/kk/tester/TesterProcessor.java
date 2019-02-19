@@ -49,7 +49,7 @@ public class TesterProcessor extends AbstractProcessor {
             props.load(inStream);
         } catch (IOException e) {
             processingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE,
-                    String.format("Nie można wczytać pliku konfiguracyjnego %s - z powodu %s %n", url.toString(), e.getMessage()));
+                    String.format("Cannot read configuration file %s - cause: %s %n", url.toString(), e.getMessage()));
         }
 
         VelocityEngine ve = new VelocityEngine(props);
@@ -78,7 +78,7 @@ public class TesterProcessor extends AbstractProcessor {
             writer.close();
         } catch (IOException e) {
             processingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE,
-                    String.format("Nie można utworzyć pliku %s - z powodu %s %n", url.toString(), e.getMessage()));
+                    String.format("Cannot create source file %s - case: %s %n", url.toString(), e.getMessage()));
         }
 
         return false;
