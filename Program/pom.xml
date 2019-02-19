@@ -26,7 +26,6 @@
         </dependency>
     </dependencies>
 
-
     <build>
         <finalName>Program</finalName>
         <plugins>
@@ -39,7 +38,7 @@
                         <index>true</index>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>Tester</mainClass>
+                            <mainClass>pl.kk.program.App</mainClass>
                         </manifest>
                         <manifestEntries>
                             <mode>development</mode>

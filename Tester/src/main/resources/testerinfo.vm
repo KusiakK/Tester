@@ -1,0 +1,14 @@
+package pl.kk.program;
+
+import pl.kk.annotations.Run;
+import pl.kk.tester.Tester;
+
+public class App {
+
+    public static void main(String[] args) throws java.lang.Exception {
+        Tester tester = new Tester();
+    #foreach($fqClassName in $fqClassNames)
+        tester.process(${fqClassName}.class, Run.class);
+    #end
+    }
+}
