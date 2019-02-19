@@ -13,10 +13,7 @@ import javax.tools.JavaFileObject;
 import java.io.IOException;
 import java.io.Writer;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Set;
+import java.util.*;
 
 @SupportedAnnotationTypes("pl.kk.annotations.Run")
 @SupportedSourceVersion(SourceVersion.RELEASE_11)
@@ -27,7 +24,7 @@ public class TesterProcessor extends AbstractProcessor {
     private String packageName = null;
     private Map<String, VariableElement> fields = new HashMap<>();
     private Map<String, ExecutableElement> methods = new HashMap<>();
-    private Map<String, TypeElement> classes = new HashMap<>();
+    private List<String> fqClassNames = new LinkedList<>();
 
 
     @Override
@@ -54,8 +51,7 @@ public class TesterProcessor extends AbstractProcessor {
                 className = classElement.getSimpleName().toString();
                 packageName = packageElement.getQualifiedName().toString();
 
-
-                classes.put(className, classElement);
+                fqClassNames.add(fqClassName);
             } else if (e.getKind() == ElementKind.FIELD) {
 
                 VariableElement varElement = (VariableElement) e;
@@ -86,7 +82,7 @@ public class TesterProcessor extends AbstractProcessor {
             }
         }
 
-        return true;
+        return false;
 
     }
 
@@ -104,7 +100,7 @@ public class TesterProcessor extends AbstractProcessor {
         vc.put("packageName", packageName);
         vc.put("fields", fields);
         vc.put("methods", methods);
-        vc.put("classes", classes);
+        vc.put("fqClassNames", fqClassNames);
 
         Template vt = ve.getTemplate("testerinfo.vm");
 
