@@ -5,7 +5,7 @@ import org.apache.velocity.VelocityContext;
 
 import java.io.Writer;
 
-class AbstractJavaSourceFile implements JavaSourceFile, ContextHolder {
+abstract class AbstractJavaSourceFile implements JavaSourceFile {
     private final VelocityContext velocityContext;
     private Template template;
 
