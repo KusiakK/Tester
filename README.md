@@ -19,7 +19,7 @@ Program odpalający metody oznaczone adnotacją @Run
 
 - włącz linuxa
 - odpal terminal
-- git clone https://git.epam.com/Konrad_Kusiak/Tester.git
+- git clone https://github.com/KusiakK/Tester.git
 - cd Tester
 - mvn install lub mvn clean install
 - mvn exec:java -pl Program
