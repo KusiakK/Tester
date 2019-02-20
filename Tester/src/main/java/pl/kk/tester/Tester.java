@@ -24,15 +24,8 @@ public class Tester {
                     method.invoke(testObject);
                     statistics.logSuccessfulRun(method);
                 }
-            } catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException e) {
                 statistics.logFailedRun(method, e.getMessage());
-                System.err.format("metoda %s - nieodpowiednia ilość argumentów (%s) %n", method, e.getMessage());
-            } catch (IllegalAccessException e) {
-                statistics.logFailedRun(method, e.getMessage());
-                System.err.format("metoda %s - dostęp zabroniony? %s przyczyna: %s %n", method, e.getMessage(), e.getCause());
-            } catch (InvocationTargetException e) {
-                statistics.logFailedRun(method, e.getMessage());
-                System.err.format("metoda %s - wywołanie nieudane z racji na %s przyczyna: %s %n", method, e.getMessage(), e.getCause());
             }
         }
     }
